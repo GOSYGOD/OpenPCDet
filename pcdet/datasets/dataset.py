@@ -98,7 +98,7 @@ class DatasetTemplate(torch_data.Dataset):
 
         annos = []
         for index, box_dict in enumerate(pred_dicts):
-            single_pred_dict = generate_single_sample_dict(box_dict)
+            single_pred_dict = generate_single_sample_dict(box_dict) # pred dict, add name
             single_pred_dict['frame_id'] = batch_dict['frame_id'][index]
             if 'metadata' in batch_dict:
                 single_pred_dict['metadata'] = batch_dict['metadata'][index]

@@ -46,6 +46,12 @@ def parse_config():
 
     args = parser.parse_args()
 
+    args.cfg_file = 'cfgs/wanji_models/second.yaml'
+    args.batch_size = 2
+    args.epochs = 120
+
+    # python train.py --cfg_file cfgs/wanji_models/second.yaml --batch_size 4
+
     cfg_from_yaml_file(args.cfg_file, cfg)
     cfg.TAG = Path(args.cfg_file).stem
     cfg.EXP_GROUP_PATH = '/'.join(args.cfg_file.split('/')[1:-1])  # remove 'cfgs' and 'xxxx.yaml'

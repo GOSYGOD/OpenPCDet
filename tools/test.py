@@ -42,6 +42,11 @@ def parse_config():
 
     args = parser.parse_args()
 
+    # zjx, for debug
+    args.cfg_file = 'cfgs/wanji_models/second.yaml'
+    args.batch_size = 2
+    args.ckpt = '/file/OpenPCDet/output/wanji_models/second/default/ckpt/checkpoint_epoch_150.pth'
+
     cfg_from_yaml_file(args.cfg_file, cfg)
     cfg.TAG = Path(args.cfg_file).stem
     cfg.EXP_GROUP_PATH = '/'.join(args.cfg_file.split('/')[1:-1])  # remove 'cfgs' and 'xxxx.yaml'
@@ -56,7 +61,7 @@ def parse_config():
 
 def eval_single_ckpt(model, test_loader, args, eval_output_dir, logger, epoch_id, dist_test=False):
     # load checkpoint
-    model.load_params_from_file(filename=args.ckpt, logger=logger, to_cpu=dist_test)
+    model.load_params_from_file(filename=args.ckpt, logger=logger, to_cpu=dist_test) # load weights and checkpoint
     model.cuda()
 
     # start evaluation

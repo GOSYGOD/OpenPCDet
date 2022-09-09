@@ -62,7 +62,7 @@ class Calibration(object):
         pts_lidar = np.dot(pts_rect_hom, np.linalg.inv(np.dot(R0_ext, V2C_ext).T))
         return pts_lidar[:, 0:3]
 
-    def lidar_to_rect(self, pts_lidar):
+    def lidar_to_rect(self, pts_lidar): # TODO: kitti calib
         """
         :param pts_lidar: (N, 3)
         :return pts_rect: (N, 3)

@@ -55,7 +55,7 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
     if cfg.LOCAL_RANK == 0:
         progress_bar = tqdm.tqdm(total=len(dataloader), leave=True, desc='eval', dynamic_ncols=True)
     start_time = time.time()
-    for i, batch_dict in enumerate(dataloader):
+    for i, batch_dict in enumerate(dataloader): # pred all val data
         load_data_to_gpu(batch_dict)
 
         if getattr(args, 'infer_time', False):
@@ -119,7 +119,7 @@ def eval_one_epoch(cfg, args, model, dataloader, epoch_id, logger, dist_test=Fal
                 % (len(det_annos), total_pred_objects / max(1, len(det_annos))))
 
     with open(result_dir / 'result.pkl', 'wb') as f:
-        pickle.dump(det_annos, f)
+        pickle.dump(det_annos, f) # save pred results
 
     result_str, result_dict = dataset.evaluation(
         det_annos, class_names,
